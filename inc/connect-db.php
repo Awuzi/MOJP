@@ -5,14 +5,14 @@ $name = $conf[0];
 $log = $conf[1];
 $pass = $conf[2];*/
 
-$db = parse_ini_file("config.ini");
-//parse_ini_file, recupere les infos d'un fichier .ini -> qui les met dans un tableau    assoc
+$config_db = parse_ini_file("config.ini");
+//parse_ini_file, recupere les infos d'un fichier .ini -> qui les met dans un tableau assoc
 
 ini_set('display_errors', 1);
-define('DB_NAME', $db['name']);
-define('DB_DSN', 'mysql:host=localhost;dbname=' . $db['name'] . ';charset=utf8');
-define('DB_USER', $db['user']);
-define('DB_PASSWORD', $db['pass']);
+define('DB_NAME', $config_db['name']);
+define('DB_DSN', 'mysql:host=localhost;dbname=' . $config_db['name'] . ';charset=utf8');
+define('DB_USER', $config_db['user']);
+define('DB_PASSWORD', $config_db['pass']);
 define('DEBUG', false);
 
 $dbError = '';
