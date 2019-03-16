@@ -8,7 +8,13 @@ $getOrders = getOrders();
 <main role="main" class="flex-shrink-0 container">
     <div class="container">
         <h1>MOJP SIO12</h1>
-        <div class="container">
+        <?php if (connectToBDD($db['namePresta'], $db['userPresta'], $db['passPresta']) && connectToBDD($db['nameMOJP'], $db['userMOJP'], $db['passMOJP'])) { ?>
+            <div class="alert alert-success m-auto col-md-6" style="text-align: center;">
+                connexion au deux bases de donnée reussie !
+            </div>
+        <?php } ?>
+        <h4>Test de connexion à prestashopBdd</h4>
+        <div class="container mt-2" style="background: lightgrey;">
             <table class="table">
                 <th>nom</th>
                 <th>prenom</th>
@@ -28,7 +34,7 @@ $getOrders = getOrders();
                     <tr>
                         <td><?php echo $element->reference . "\n"; ?></td>
                         <td><?php echo $element->payment . "\n"; ?></td>
-                        <td><?php echo round($element->total_paid,2). " $" . "\n"; ?></td>
+                        <td><?php echo round($element->total_paid, 2) . " $" . "\n"; ?></td>
                         <td><?php echo $element->date_upd . "\n"; ?></td>
                     </tr>
                 <?php } ?>
