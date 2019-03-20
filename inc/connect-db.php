@@ -1,8 +1,8 @@
 <?php
 function connectToBDD($dbname, $dbuser, $dbpass) {
-    $options = [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ, PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES UTF8', PDO::ATTR_EMULATE_PREPARES => false ];
+    $options = [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ, PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES UTF8', PDO::ATTR_EMULATE_PREPARES => false];
     try {
-        return new PDO('mysql:host=localhost;dbname='.$dbname.';charset=utf8', $dbuser, $dbpass, $options);
+        return new PDO('mysql:host=localhost;dbname=' . $dbname . ';charset=utf8', $dbuser, $dbpass, $options);
     } catch (PDOException $e) {
         $dbError = 'Connexion à la base de donnée impossible !' . (DEBUG ? "\n" . $e->getMessage() : '');
         die($dbError);
