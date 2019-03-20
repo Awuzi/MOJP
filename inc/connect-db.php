@@ -11,5 +11,5 @@ function connectToBDD($dbname, $dbuser, $dbpass) {
 $db = parse_ini_file("./inc/config.ini");
 //parse_ini_file, recupere les infos d'un fichier .ini -> qui les met dans un tableau assoc
 //on exploite directement les infos de ce tableau assoc //$db['name']// sans passer par les define,
-$pdo = connectToBDD($db['namePresta'], $db['userPresta'], $db['passPresta']); //connexion à presta
-$pdo2 = connectToBDD($db['nameMOJP'], $db['userMOJP'], $db['passMOJP']); //connexion à mojp
+$presta = connectToBDD($db['namePresta'], $db['userPresta'], $db['passPresta']); //connexion à presta
+$mojp = connectToBDD($db['nameMOJP'], $db['userMOJP'], $db['passMOJP']); //connexion à mojp
