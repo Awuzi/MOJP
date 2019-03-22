@@ -1,11 +1,6 @@
 <?php
-require_once 'header.php';
-require_once 'inc/manager-db.php';
-$getOrders = getOrders();
-$getTest = getTest();
-$connexion = (connectToBDD($db['namePresta'], $db['userPresta'], $db['passPresta']) && connectToBDD($db['nameMOJP'], $db['userMOJP'], $db['passMOJP']) == true);
+include "header.php";
 ?>
-
 <main role="main" class="flex-shrink-0 container">
     <div class="container">
         <h1>MOJP SIO12</h1>
@@ -15,7 +10,7 @@ $connexion = (connectToBDD($db['namePresta'], $db['userPresta'], $db['passPresta
             </div>
             <h4>Test de connexion à prestashopBdd</h4>
                 <div class="container mt-2 rounded" style="background: gainsboro;">
-                    <table class="table">
+                    <table class="table" id="table">
                         <th>ref produit</th>
                         <th>moyen de pay</th>
                         <th>total commande</th>

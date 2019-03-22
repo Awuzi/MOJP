@@ -1,3 +1,27 @@
+<?php
+session_start();
+require_once 'header.php';
+require_once 'inc/manager-db.php';
+$getOrders = getOrders();
+$getTest = getTest();
+$connexion = (connectToBDD($db['namePresta'], $db['userPresta'], $db['passPresta']) && connectToBDD($db['nameMOJP'], $db['userMOJP'], $db['passMOJP']) == true);
+if (!isset($_SESSION["connect"])) {
+    header("location: login.php", true, 302);
+}
+function endsWith($haystack, $needle) {
+    // search forward starting from end minus needle length characters
+    if ($needle === '') {
+        return true;
+    }
+    $diff = \strlen($haystack) - \strlen($needle);
+    return $diff >= 0 && strpos($haystack, $needle, $diff) !== false;
+}
+
+    $email = "yohann@marketplace.amazon.co.uk";
+    if (endsWith($email, "marketplace.amazon.co.uk")) {
+        echo "AZ";
+    }
+?>
 <!doctype html>
 <html lang="fr" class="h-100">
 
@@ -10,8 +34,11 @@
     <link href="assets/bootstrap-4.2.1-dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="css/custom.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/library/datatables.min.css">
+    <script src="assets/library/jquery-3.1.1.js"></script>
+    <script src="assets/library/tables.js"></script>
+    <script src="assets/library/bootstrap.min.js"></script>
 </head>
-
 <body class="d-flex flex-column h-100">
 <header>
     <nav class="navbar navbar-expand-md navbar-dark fixed-top rounded-bottom" style="background: #0f6ab4;">
@@ -24,14 +51,17 @@
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="login">Login</a>
+                    <a class="nav-link" href="login.php?logout">Logout</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="register">Register</a>
-                </li>
-
             </ul>
 
         </div>
     </nav>
 </header>
+<script type="text/javascript">
+    if (document.getElementById("table")) {
+        $(document).ready(function () {
+            $('#table').DataTable();
+        });
+    }
+</script>
