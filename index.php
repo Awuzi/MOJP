@@ -34,7 +34,7 @@ $connexion = (connectToBDD($db['namePresta'], $db['userPresta'], $db['passPresta
                 <div class="container mt-2 rounded" style="background: gainsboro;">
                     <table class="table ">
                         <th>test</th>
-                        <th>test</th>
+                        <th>test</th> kk
                         <?php foreach ($getTest as $element) { ?>
                             <tr>
                                 <td><?php echo $element->test . "\n"; ?></td>
