@@ -9,12 +9,15 @@ include "header.php";
                 connexion au deux bases de donnée reussie !
             </div>
             <h4>Test de connexion à prestashopBdd</h4>
-                <div class="container mt-2 rounded" style="background: gainsboro;">
+                <div class="container mt-2 rounded">
                     <table class="table" id="table">
-                        <th>ref produit</th>
-                        <th>moyen de pay</th>
-                        <th>total commande</th>
-                        <th>derniere maj</th>
+                        <thead class="thead-dark" style="text-align: center; border: 1px solid #32383e;">
+                        <th scope="col">ref produit</th>
+                        <th scope="col">moyen de pay</th>
+                        <th scope="col">total commande</th>
+                        <th scope="col">derniere maj</th>
+                        </thead>
+                        <tbody style="text-align: center;">
                         <?php foreach ($getOrders as $element) { ?>
                             <tr>
                                 <td><?php echo $element->reference . "\n"; ?></td>
@@ -23,19 +26,24 @@ include "header.php";
                                 <td><?php echo $element->date_upd . "\n"; ?></td>
                             </tr>
                         <?php } ?>
+                        </tbody>
                     </table>
                 </div>
             <h4>Test de connexion à mojp</h4>
-                <div class="container mt-2 rounded" style="background: gainsboro;">
-                    <table class="table ">
-                        <th>test</th>
-                        <th>test</th> kk
+                <div class="container mt-2 rounded">
+                    <table class="table" id="table">
+                        <thead class="thead-dark" style="text-align: center; border: 1px solid #32383e;">
+                        <th scope="col">test</th>
+                        <th scope="col">test</th>
+                        </thead>
+                        <tbody style="text-align: center;">
                         <?php foreach ($getTest as $element) { ?>
                             <tr>
                                 <td><?php echo $element->test . "\n"; ?></td>
                                 <td><?php echo $element->test1 . "\n"; ?></td>
                             </tr>
                         <?php } ?>
+                        </tbody>
                     </table>
                 </div>
         <?php } else { ?>
@@ -46,7 +54,4 @@ include "header.php";
     </div>
 </main>
 
-<?php
-require_once 'javascripts.php';
-require_once 'footer.php';
-?>
+<?php require_once 'footer.php'; ?>

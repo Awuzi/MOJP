@@ -58,10 +58,3 @@ function endsWith($haystack, $needle) {
         </div>
     </nav>
 </header>
-<script type="text/javascript">
-    if (document.getElementById("table")) {
-        $(document).ready(function () {
-            $('#table').DataTable();
-        });
-    }
-</script>
