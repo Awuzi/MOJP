@@ -1,6 +1,5 @@
 <?php
 require_once 'connect-db.php';
-
 function selectInfoFromPresta() {
     global $presta;
     return $presta->query("SELECT `id_customer`,`id_address_delivery`,`id_order`,`reference`,`id_carrier`,`invoice_date`,`id_cart`,`total_paid`,`shipping_number`,`gift_message` FROM ps_orders LIMIT 100")->fetchAll();
@@ -14,7 +13,7 @@ function selectCustomer($idCustomer) {
     return $result->fetch();
 }
 
-function selectCustomerAdress($idCustomer){
+function selectCustomerAdress($idCustomer) {
     global $presta;
     $result = $presta->prepare("SELECT `address1`, `city` FROM ps_address WHERE id_customer = :id_customer");
     $result->bindValue(':id_customer', $idCustomer, PDO::PARAM_STR);
@@ -22,10 +21,19 @@ function selectCustomerAdress($idCustomer){
     return $result->fetch();
 }
 
-function selectCustomerItem($idCustomer){
+function endsWith($haystack, $needle) {
+    $needle === '' ? TRUE : FALSE ;
+    $diff = strlen($haystack) - strlen($needle);
+    return $diff >= 0 && strpos($haystack, $needle, $diff) !== FALSE;
+}
+
+
+// TODO: trouver la jointure pour selectionne les elements du panier du client
+function selectCustomerItem($idCustomer) {
     global $presta;
     $result = $presta->prepare("SELECT ``,``,`` FROM ps_product WHERE id_customer = :");
 }
+
 
 
 
