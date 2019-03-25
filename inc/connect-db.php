@@ -8,6 +8,7 @@ function connectToBDD($dbname, $dbuser, $dbpass) {
         die($dbError);
     }
 }
+
 $db = parse_ini_file("./inc/config.ini");
 //parse_ini_file, recupere les infos d'un fichier .ini -> qui les met dans un tableau assoc
 //on exploite directement les infos de ce tableau assoc //$db['name']// sans passer par les define,
