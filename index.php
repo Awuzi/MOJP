@@ -12,28 +12,43 @@ require_once 'inc/manager-db.php';
                     <div class=" mt-4 rounded">
                         <table class="table border" id="table">
                             <thead class="thead" style="text-align: center; background : royalblue; color: white;">
+                            <th scope="col">id</th>
                             <th scope="col">Email</th>
                             <th scope="col">Nom</th>
                             <th scope="col">Adressse</th>
-                            <th scope="col">ref produit</th>
-                            <th scope="col">id order</th>
+                            <th scope="col">reference</th>
                             <th scope="col">total commande</th>
-                            <th scope="col">derniere maj</th>
+                            <th scope="col">Transporter</th>
+                            <th scope="col">note</th>
+                            <th scope="col">Action</th>
                             </thead>
                             <tbody style="text-align: center;">
                             <?php foreach ($getInfoOrders as $element) {
                                 $idCustomer = $element->id_customer;
+                                $idOrder = $element->id_order;
+                                $idCarrier = $element->id_carrier;
                                 $selectCustomer = selectCustomer($idCustomer);
                                 $selectCustomerAdress = selectCustomerAdress($idCustomer);
+                                $selectOrderItem = selectOrderItem($idOrder);
+                                $selectCarrier = selectCarrier($idCarrier);
                                 ?>
                                 <tr>
+                                    <td><?php echo $idOrder;?></td>
                                     <td><?php echo $selectCustomer->email . "\n"; ?></td>
                                     <td><?php echo $selectCustomer->firstname . " " . $selectCustomer->lastname . "\n"; ?></td>
                                     <td><?php echo $selectCustomerAdress->address1 . ", " . $selectCustomerAdress->city . "\n"; ?></td>
-                                    <td><?php echo $element->reference . "\n"; ?></td>
-                                    <td><?php echo $element->id_order . "\n"; ?></td>
+                                    <td><?php foreach ($selectOrderItem as $item) { echo $item->product_quantity . "x " . $item->product_name . " (" . $item->reference . ")<br>"; } ?></td>
                                     <td><?php echo round($element->total_paid, 1) . " $" . "\n"; ?></td>
-                                    <td><?php echo $element->invoice_date . "\n"; ?></td>
+                                    <td><?php echo $selectCarrier->name;?></td>
+
+                                    <td> <button class="btn btn-outline-primary"> <i class="fas fa-pen"></i></button> </td>
+                                    <td>
+                                        <select class="form-control form-control-sm">
+                                            <option value="paiement" style="color: blue;">Paiement accepté</option>
+                                            <option value="en_cours" style="color: sandybrown;">En cours de livraison</option>
+                                            <option value="livree" style="color: green;">Livré</option>
+                                        </select>
+                                    </td>
                                 </tr>
                             <?php } ?>
                             </tbody>
@@ -46,4 +61,4 @@ require_once 'inc/manager-db.php';
                 <?php } ?>
             </div>
         </main>
-<?php require_once 'footer.php'; ?>
+        <?php require_once 'footer.php'; ?>

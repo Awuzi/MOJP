@@ -15,6 +15,7 @@ if (!isset($_SESSION["connect"])) { header("location: login.php", true, 302); }
     <title>MOJP</title>
     <!-- Bootstrap core CSS -->
     <link href="assets/bootstrap-4.2.1-dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <!-- Custom styles for this template -->
     <link href="css/custom.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/library/datatables.min.css">

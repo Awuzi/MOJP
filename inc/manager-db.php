@@ -22,16 +22,27 @@ function selectCustomerAdress($idCustomer) {
 }
 
 function endsWith($haystack, $needle) {
-    $needle === '' ? TRUE : FALSE ;
+    $needle === '' ? TRUE : FALSE;
     $diff = strlen($haystack) - strlen($needle);
     return $diff >= 0 && strpos($haystack, $needle, $diff) !== FALSE;
 }
 
 
 // TODO: trouver la jointure pour selectionne les elements du panier du client
-function selectCustomerItem($idCustomer) {
+function selectOrderItem($idOrder) {
     global $presta;
-    $result = $presta->prepare("SELECT ``,``,`` FROM ps_product WHERE id_customer = :");
+    $result = $presta->prepare("SELECT reference, product_name, product_quantity FROM ps_orders, ps_order_detail WHERE :id_order = ps_order_detail.id_order ");
+    $result->bindValue(':id_order', $idOrder, PDO::PARAM_STR);
+    $result->execute();
+    return $result->fetchAll();
+}
+
+function selectCarrier($idCarrier){
+    global $presta;
+    $result = $presta->prepare("SELECT reference, ps_carrier.name FROM ps_orders, ps_carrier WHERE ps_carrier.id_carrier = :id_carrier;");
+    $result->bindValue(":id_carrier", $idCarrier, PDO::PARAM_STR);
+    $result->execute();
+    return $result->fetch();
 }
 
 
