@@ -29,7 +29,7 @@ require_once 'inc/manager-db.php';
                                 $idCarrier = $element->id_carrier;
                                 $selectCustomer = selectCustomer($idCustomer);
                                 $selectCustomerAdress = selectCustomerAdress($idCustomer);
-                                $selectOrderItem = selectOrderItem($idOrder);
+                                $selectOrderItem = selectOrderItem($idOrder, $element->reference);
                                 $selectCarrier = selectCarrier($idCarrier);
                                 ?>
                                 <tr>
@@ -38,12 +38,9 @@ require_once 'inc/manager-db.php';
                                     <td><?php echo $selectCustomer->firstname . " " . $selectCustomer->lastname . "\n"; ?></td>
                                     <td><?php echo $selectCustomerAdress->address1 . ", " . $selectCustomerAdress->city . "\n"; ?></td>
                                     <td><?php
-                                        $tailleOrderItem = sizeof($selectOrderItem);
-                                        for ($i = 0; $i < $tailleOrderItem; $i++):
-                                            if ($selectOrderItem[$i]->reference == $element->reference) {
-                                                echo $selectOrderItem[$i]->product_quantity . "x " . $selectOrderItem[$i]->product_name . " (" . $selectOrderItem[$i]->reference . ")<br>";
-                                            }
-                                        endfor;
+                                        foreach ($selectOrderItem as $item) {
+                                            echo $item->product_quantity . "x " . $item->product_name . " (" . $item->reference . ")<br>";
+                                        }
                                         ?></td>
                                     <td><?php echo round($element->total_paid, 1) . " $" . "\n"; ?></td>
                                     <td><?php echo $selectCarrier->name;?></td>
