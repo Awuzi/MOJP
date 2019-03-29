@@ -5,6 +5,8 @@ require_once 'inc/manager-db.php';
 $getInfoOrders = selectInfoFromPresta();
 $connexion = (connectToBDD($db['namePresta'], $db['userPresta'], $db['passPresta']) && connectToBDD($db['nameMOJP'], $db['userMOJP'], $db['passMOJP']) == true);
 if (!isset($_SESSION["connect"])) { header("location: login.php", true, 302); }
+
+
 ?>
 <!DOCTYPE HTML>
 <html lang="fr" class="h-100">

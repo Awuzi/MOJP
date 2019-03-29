@@ -1,6 +1,7 @@
 <?php
 require_once 'header.php';
 require_once 'inc/manager-db.php';
+quiPrendTout();
 ?>
 <main role="main" class="flex-shrink-0 col-md-12">
     <div class="">
