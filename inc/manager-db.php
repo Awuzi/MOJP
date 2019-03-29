@@ -31,7 +31,7 @@ function endsWith($haystack, $needle) {
 // TODO: trouver la jointure pour selectionne les elements du panier du client
 function selectOrderItem($idOrder) {
     global $presta;
-    $result = $presta->prepare("SELECT reference, product_name, product_quantity FROM ps_orders, ps_order_detail WHERE :id_order = ps_order_detail.id_order ");
+    $result = $presta->prepare("SELECT reference, product_name, product_quantity FROM ps_orders, ps_order_detail WHERE ps_order_detail.id_order = :id_order;");
     $result->bindValue(':id_order', $idOrder, PDO::PARAM_STR);
     $result->execute();
     return $result->fetchAll();
