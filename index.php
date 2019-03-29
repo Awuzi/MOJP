@@ -17,6 +17,7 @@ require_once 'inc/manager-db.php';
                             <th scope="col">Nom</th>
                             <th scope="col">Adressse</th>
                             <th scope="col">reference</th>
+                            <th scope="col">date</th>
                             <th scope="col">total commande</th>
                             <th scope="col">Transporter</th>
                             <th scope="col">note</th>
@@ -27,6 +28,7 @@ require_once 'inc/manager-db.php';
                                 $idCustomer = $element->id_customer;
                                 $idOrder = $element->id_order;
                                 $idCarrier = $element->id_carrier;
+                                $date = $element->date_add;
                                 $selectCustomer = selectCustomer($idCustomer);
                                 $selectCustomerAdress = selectCustomerAdress($idCustomer);
                                 $selectOrderItem = selectOrderItem($idOrder, $element->reference);
@@ -42,6 +44,7 @@ require_once 'inc/manager-db.php';
                                             echo $item->product_quantity . "x " . $item->product_name . " (" . $item->reference . ")<br>";
                                         }
                                         ?></td>
+                                    <td><?php echo $date; ?></td>
                                     <td><?php echo round($element->total_paid, 1) . " $" . "\n"; ?></td>
                                     <td><?php echo $selectCarrier->name;?></td>
 
