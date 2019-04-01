@@ -9,19 +9,18 @@ quiPrendTout();
             <div class="">
                 <h1>MOJP SIO12</h1>
                 <?php if ($connexion) { ?>
-                    <span class="alert alert-success">connexion au deux bases de donnée reussie !</span>
                     <div class=" mt-4 rounded">
                         <table class="table border" id="table">
                             <thead class="thead" style="text-align: center; background : royalblue; color: white;">
-                            <th scope="col">id</th>
+                            <th scope="col">Id</th>
                             <th scope="col">Email</th>
                             <th scope="col">Nom</th>
-                            <th scope="col">Adressse</th>
-                            <th scope="col">reference</th>
-                            <th scope="col">date</th>
-                            <th scope="col">total commande</th>
-                            <th scope="col">Transporter</th>
-                            <th scope="col">note</th>
+                            <th scope="col">Adresse</th>
+                            <th scope="col">Réference</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Total</th>
+                            <th scope="col">Transporteur</th>
+                            <th scope="col">Note</th>
                             <th scope="col">Action</th>
                             </thead>
                             <tbody style="text-align: center;">
@@ -49,7 +48,8 @@ quiPrendTout();
                                     <td><?php echo round($element->total_paid, 1) . " $" . "\n"; ?></td>
                                     <td><?php echo $selectCarrier->name;?></td>
 
-                                    <td> <button class="btn btn-outline-primary"> <i class="fas fa-pen"></i></button> </td>
+                                    <td><button type="button" class="btn btn-outline-primary" data-toggle="modal"
+                                                                                        data-target=".bd-example-modal-sm"><i class="fas fa-pen"></i></button></td>
                                     <td>
                                         <select class="form-control form-control-sm">
                                             <option value="paiement" style="color: blue;">Paiement accepté</option>
@@ -62,6 +62,7 @@ quiPrendTout();
                             </tbody>
                         </table>
                     </div>
+                    <?php include('inc/modal.php'); ?>
                 <?php } else { ?>
                     <div class="alert alert-danger m-auto col-md-6" style="text-align: center;">
                         connexion au deux bases de donnée impossible !
