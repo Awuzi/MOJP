@@ -58,11 +58,12 @@ function quiPrendTout() {
     global $mojp;
     global $presta;
 
-    $result = $presta->prepare("SELECT id_order FROM ps_orders ORDER BY id_order DESC LIMIT 0,1");
+    $result = $presta->prepare("SELECT id_order,date_add FROM ps_orders ORDER BY id_order DESC LIMIT 0,1");
     $result->execute();
     $orders = $result->fetch();
     $toAddList = array();
     $nb = $orders->id_order;
+    $ship = $orders->date_add;
 
     $verifTable = $mojp->prepare("SELECT * FROM ldb_orders");
     $verifTable->bindValue(":idOrder", $nb, PDO::PARAM_STR);
@@ -105,56 +106,23 @@ function quiPrendTout() {
                 $selectInfoFromPresta = selectInfoFromPrestaById($idOrd);
                 $id = $idOrd;
             }
-            $date = $selectInfoFromPresta->date_add;
-            $shipping = $selectInfoFromPresta->shipping_number;
+            $tracking = $selectInfoFromPresta->shipping_number;
 
-            $idCustomer = $selectInfoFromPresta->id_customer;
-            $selectCustomer = selectCustomer($idCustomer);
-
-            $email = $selectCustomer->email;
-            $prenom = $selectCustomer->firstname;
-            $nom = $selectCustomer->lastname;
-
-            $selectCustomerAdress = selectCustomerAdress($idCustomer);
-
-            $adresse1 = $selectCustomerAdress->address1;
-            $city = $selectCustomerAdress->city;
             $reference = $selectInfoFromPresta->reference;
 
-            $selectOrderItem = selectOrderItem($id, $reference);
-
-            $items = array();
-
-            foreach ($selectOrderItem as $item) {
-                array_push($items, $item->product_quantity . "x " . $item->product_name . " (" . $item->reference . ")<br>");
-            }
-            $idCarrier = $selectInfoFromPresta->id_carrier;
-
-            $selectCarrier = selectCarrier($idCarrier);
-            $carrier = $selectCarrier->name;
-            AjoutOrder($id, $email, $nom . " " . $prenom, $adresse1 . " " . $city, $date, $items, $carrier, $shipping, $reference);
+            AjoutOrder($id, $ship, $tracking, $reference);
         }
     }
     return false;
 }
 
-function AjoutOrder($idOrder, $email, $name, $adress, $date, $items, $carrier, $shipping, $reference) {
+function AjoutOrder($idOrder, $ship, $tracking, $reference) {
     global $mojp;
-    $stringItems = "";
-    foreach ($items as $item => $value) {
-        $stringItems .= $value;
-    }
-    $result = $mojp->prepare("INSERT INTO ldb_orders VALUES ('', :idOrder, :Mail, :Name, :Adress, :date, :Item, :carrier, :shipping, :ref, '', '')");
+    $result = $mojp->prepare("INSERT INTO ldb_orders VALUES ('', :idOrder, :ship, :tracking, :ref, '', '')");
         $result->bindValue(":idOrder", $idOrder);
-        $result->bindValue(":Mail", $email);
-        $result->bindValue(":Name", $name);
-        $result->bindValue(":Adress", $adress);
-        $result->bindValue(":date", $date);
-        $result->bindValue(":Item", $stringItems);
-        $result->bindValue(":carrier", $carrier);
-        $result->bindValue(":shipping", $shipping);
+        $result->bindValue(":ship", $ship);
+        $result->bindValue(":tracking", $tracking);
         $result->bindValue(":ref", $reference);
         $result->execute();
-
         return true;
 }
