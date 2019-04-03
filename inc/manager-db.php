@@ -134,4 +134,3 @@ function AjoutOrder($idOrder, $ship, $tracking, $reference) {
         $result->execute();
         return true;
 }
-
