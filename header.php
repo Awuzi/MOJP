@@ -1,4 +1,13 @@
 <?php
+header("Content-Security-Policy: default-src 'none'; style-src 'self' 'unsafe-inline' https://use.fontawesome.com/; frame-src 'self' https://www.google.com/; frame-ancestors 'self'; font-src 'self' https://use.fontawesome.com/; img-src 'self'; object-src 'none'; script-src 'self' 'sha256-fVrDNWdB+8wdKusutyJcfq0EFyVZit1SDHEpSEwITio='; base-uri 'self'; form-action 'self';");
+header("X-XSS-Protection: 1; mode=block");
+header("X-Frame-Options: SAMEORIGIN");
+header("X-Content-Type-Options: nosniff");
+header("Strict-Transport-Security: max-age=63072000");
+header('Access-Control-Allow-Origin: *');
+
+ini_set('session.cookie_httponly', 1);
+ini_set('session.cookie_secure', 1);
 session_start();
 require_once 'header.php';
 require_once 'inc/manager-db.php';
@@ -15,7 +24,7 @@ if (!isset($_SESSION["connect"])) { header("location: login.php", true, 302); }
     <title>MOJP</title>
     <!-- Bootstrap core CSS -->
     <link href="assets/bootstrap-4.2.1-dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
     <!-- Custom styles for this template -->
     <link href="css/custom.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/library/datatables.min.css">

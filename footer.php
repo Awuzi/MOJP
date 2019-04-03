@@ -1,4 +1,4 @@
-<script type="text/javascript">
+<script type="text/javascript" integrity="sha256-fVrDNWdB+8wdKusutyJcfq0EFyVZit1SDHEpSEwITio=" crossorigin="anonymous">
     if (document.getElementById("table")) {
         $(document).ready(function () {
             $('#table').DataTable();
