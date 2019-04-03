@@ -35,10 +35,12 @@ if(isset($_POST['edit'])) UpdateNote($_POST['editID'], $_POST['note']);
                                 $selectCustomerAdress = selectCustomerAdress($idCustomer);
                                 $selectOrderItem = selectOrderItem($idOrder, $element->reference);
                                 $selectCarrier = selectCarrier($idCarrier);
+                                $email = $selectCustomer->email;
+                                if (endsWith($email,  "marketplace.amazon.co.uk")) $email = "AZ";
                                 ?>
                                 <tr>
                                     <td><?php echo $idOrder;?></td>
-                                    <td><?php echo $selectCustomer->email . "\n"; ?></td>
+                                    <td><?php echo $email. "\n"; ?></td>
                                     <td><?php echo $selectCustomer->firstname . " " . $selectCustomer->lastname . "\n"; ?></td>
                                     <td><?php echo $selectCustomerAdress->address1 . ", " . $selectCustomerAdress->city . "\n"; ?></td>
                                     <td><?php
