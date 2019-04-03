@@ -2,6 +2,7 @@
 require_once 'header.php';
 require_once 'inc/manager-db.php';
 quiPrendTout();
+if(isset($_POST['edit'])) UpdateNote($_POST['editID'], $_POST['note']);
 ?>
 <main role="main" class="flex-shrink-0 col-md-12">
     <div class="">
