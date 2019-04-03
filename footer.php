@@ -4,6 +4,12 @@
             $('#table').DataTable();
         });
     }
+    if (document.getElementById("modal")) {
+        $(window).on('load', function () {
+            $('#modal').modal('show');
+        });
+    }
+
 </script>
 <hr />
 <footer class="footer mt-auto py-3">

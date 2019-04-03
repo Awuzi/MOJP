@@ -1,4 +1,4 @@
-<div class="modal fade bd-example-modal-sm" id="Modal">
+<div class="modal fade bd-example-modal-sm" id="modal">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header">
@@ -7,12 +7,14 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
+            <?php
+            $note = selectNote($_GET['note']);
+            ?>
             <form method="POST">
                 <div class="modal-body">
                     <div class="row">
                         <div class="col"> Note
-                            <input type="email" class="form-control" placeholder="Votre note" name="note"
-                                   required>
+                            <input class="form-control" placeholder="Votre note" name="note" value="<?php if ($note->idOrder == $_GET['note']) echo $note->Note; ?>" required>
                         </div>
                     </div>
                     <input type="hidden" id="editID" name="editID" value=""/>

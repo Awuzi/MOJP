@@ -54,6 +54,14 @@ function selectCarrier($idCarrier) {
     return $result->fetch();
 }
 
+function selectNote($idOrder) {
+    global $mojp;
+    $result = $mojp->prepare("SELECT idOrder,Note,Actions FROM ldb_orders WHERE idOrder = :idOrder");
+    $result->bindValue(":idOrder", $idOrder, PDO::PARAM_STR);
+    $result->execute();
+    return $result->fetch();
+}
+
 function quiPrendTout() {
     global $mojp;
     global $presta;

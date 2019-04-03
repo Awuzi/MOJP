@@ -29,6 +29,7 @@ quiPrendTout();
                                 $idOrder = $element->id_order;
                                 $idCarrier = $element->id_carrier;
                                 $date = $element->date_add;
+                                $note = selectNote($idOrder);
                                 $selectCustomer = selectCustomer($idCustomer);
                                 $selectCustomerAdress = selectCustomerAdress($idCustomer);
                                 $selectOrderItem = selectOrderItem($idOrder, $element->reference);
@@ -48,8 +49,15 @@ quiPrendTout();
                                     <td><?php echo round($element->total_paid, 1) . " $" . "\n"; ?></td>
                                     <td><?php echo $selectCarrier->name;?></td>
 
-                                    <td><button type="button" class="btn btn-outline-primary" data-toggle="modal"
-                                                                                        data-target=".bd-example-modal-sm"><i class="fas fa-pen"></i></button></td>
+                                    <td>
+                                        <a href="?note=<?php echo $element->id_order;?>"><button type="button" class="btn btn-outline-primary">
+                                                <?php if ($note->Note != null) { ?>
+                                                <i class="fas fa-pen"></i>
+                                                <?php }else { ?>
+                                                    <i class="fas fa-plus-square"></i>
+                                                <?php } ?>
+                                            </button></a>
+                                    </td>
                                     <td>
                                         <select class="form-control form-control-sm">
                                             <option value="paiement" style="color: blue;">Paiement accepté</option>
@@ -62,7 +70,7 @@ quiPrendTout();
                             </tbody>
                         </table>
                     </div>
-                    <?php include('inc/modal.php'); ?>
+                    <?php if(isset($_GET['note'])) include('inc/modal.php'); ?>
                 <?php } else { ?>
                     <div class="alert alert-danger m-auto col-md-6" style="text-align: center;">
                         connexion au deux bases de donnée impossible !
