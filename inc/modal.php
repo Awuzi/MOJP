@@ -14,13 +14,13 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col"> Note
-                            <input class="form-control" placeholder="Votre note" name="note" value="<?php if ($note->idOrder == $_GET['note']) echo $note->Note; ?>" required>
+                            <textarea class="form-control" placeholder="Votre note" name="note"><?php if ($note->idOrder == $_GET['note']) echo $note->Note; ?></textarea>
                         </div>
                     </div>
-                    <input type="hidden" id="editID" name="editID" value=""/>
+                    <input type="hidden" id="editID" name="editID" value="<?php if ($note->idOrder == $_GET['note']) echo $note->idOrder; ?>"/>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary float-right" name="edit">Envoyer</button>
+                    <button type="submit" class="btn btn-primary float-right" name="edit">Annoter</button>
                 </div>
             </form>
         </div>
