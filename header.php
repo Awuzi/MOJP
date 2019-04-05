@@ -1,4 +1,5 @@
 <?php
+// Sécurisation du site
 header("Content-Security-Policy: default-src 'none'; style-src 'self' 'unsafe-inline' https://use.fontawesome.com/; frame-src 'self' https://www.google.com/; frame-ancestors 'self'; font-src 'self' https://use.fontawesome.com/; img-src 'self'; object-src 'none'; script-src 'self' 'sha256-fVrDNWdB+8wdKusutyJcfq0EFyVZit1SDHEpSEwITio='; base-uri 'self'; form-action 'self';");
 header("X-XSS-Protection: 1; mode=block");
 header("X-Frame-Options: SAMEORIGIN");
@@ -34,6 +35,7 @@ if (!isset($_SESSION["connect"])) { header("location: login.php", true, 302); }
 </head>
 <body class="d-flex flex-column h-100">
     <header>
+        <!-- Barre de navigation -->
         <nav class="navbar navbar-expand-md navbar-dark fixed-top rounded-bottom" style="background: #0f6ab4;">
             <a class="navbar-brand" href="index.php">MOJP</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false"

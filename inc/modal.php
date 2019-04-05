@@ -15,7 +15,7 @@
 
 
             <?php
-            $note = selectNote($_GET['note']);
+            $note = selectNote($_GET['OrderId']);
             ?>
 
 
@@ -24,16 +24,15 @@
             <form method="POST">
                 <div class="modal-body">
                     <div class="row">
-                        <div class="col"> Note
-                            <textarea class="form-control" placeholder="Votre note" name="note"><?php if ($note->idOrder == $_GET['note']) echo $note->Note; ?></textarea>
+                        <div class="col">Note
+                            <textarea class="form-control" placeholder="Votre note" name="note"><?php if ($note != null) echo $note->Note; ?></textarea>
                         </div>
                     </div>
-                    <input type="hidden" id="editID" name="editID" value="<?php if ($note->idOrder == $_GET['note']) echo $note->idOrder; ?>"/>
+                    <input type="hidden" id="editID" name="editID" value="<?php echo $_GET['OrderId'];?>"/>
                 </div>
                 <div class="modal-footer">
-
                     <!--On créé un bouton avec un modal pour permettre de valider l'annotation de la commande.-->
-                    <button type="submit" class="btn btn-primary float-right" name="edit">Annoter</button>
+                    <button type="submit" class="btn btn-primary float-right" name="editNote">Annoter</button>
                 </div>
             </form>
         </div>

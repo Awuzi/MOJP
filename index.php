@@ -1,8 +1,7 @@
 <?php
 require_once 'header.php';
 require_once 'inc/manager-db.php';
-quiPrendTout();
-if(isset($_POST['edit'])) UpdateNote($_POST['editID'], $_POST['note']);
+if (isset($_POST['editNote'])) UpdateNote($_POST['editID'], $_POST['note']);
 ?>
 <main role="main" class="flex-shrink-0 col-md-12">
     <div class="">
@@ -10,7 +9,7 @@ if(isset($_POST['edit'])) UpdateNote($_POST['editID'], $_POST['note']);
             <div class="">
                 <h1>MOJP SIO12</h1>
                 <?php if ($connexion) { ?>
-                    <div class=" mt-4 rounded">
+                    <div class="mt-4 rounded">
                         <table class="table border" id="table">
                             <thead class="thead" style="text-align: center; background : royalblue; color: white;">
                             <th scope="col">Id</th>
@@ -36,7 +35,7 @@ if(isset($_POST['edit'])) UpdateNote($_POST['editID'], $_POST['note']);
                                 $selectOrderItem = selectOrderItem($idOrder, $element->reference);
                                 $selectCarrier = selectCarrier($idCarrier);
                                 $email = $selectCustomer->email;
-                                if (endsWith($email,  "marketplace.amazon.co.uk")) $email = "AZ";
+                                if (endsWith($email,"marketplace.amazon.co.uk")) $email = "AZ";
                                 ?>
                                 <tr>
                                     <td><?php echo $idOrder;?></td>
@@ -53,9 +52,9 @@ if(isset($_POST['edit'])) UpdateNote($_POST['editID'], $_POST['note']);
                                     <td><?php echo $selectCarrier->name;?></td>
 
                                     <td>
-                                        <a href="?note=<?php echo $element->id_order;?>"><button type="button" class="btn btn-outline-primary">
-                                                <?php if ($note->Note != null) { ?>
-                                                <i class="fas fa-pen"></i>
+                                        <a href="?OrderId=<?php echo $element->id_order;?>"><button type="button" class="btn btn-outline-primary">
+                                                <?php if ($note != null) { ?>
+                                                    <i class="fas fa-pen"></i>
                                                 <?php }else { ?>
                                                     <i class="fas fa-plus-square"></i>
                                                 <?php } ?>
@@ -73,7 +72,7 @@ if(isset($_POST['edit'])) UpdateNote($_POST['editID'], $_POST['note']);
                             </tbody>
                         </table>
                     </div>
-                    <?php if(isset($_GET['note'])) include('inc/modal.php'); ?>
+                    <?php if(isset($_GET['OrderId'])) include('inc/modal.php'); ?>
                 <?php } else { ?>
                     <div class="alert alert-danger m-auto col-md-6" style="text-align: center;">
                         connexion au deux bases de donnée impossible !

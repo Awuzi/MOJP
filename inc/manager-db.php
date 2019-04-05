@@ -63,83 +63,25 @@ function selectCarrier($idCarrier) {
 //Sélectionne la note en fonction de l'id.
 function selectNote($idOrder) {
     global $mojp;
-    $result = $mojp->prepare("SELECT idOrder,Note,Actions FROM ldb_orders WHERE idOrder = :idOrder");
+    $result = $mojp->prepare("SELECT idOrderPresta,Note,Actions FROM ldb_orders WHERE idOrderPresta = :idOrder");
     $result->bindValue(":idOrder", $idOrder, PDO::PARAM_STR);
     $result->execute();
-    return $result->fetch();
-}
-
-//Cette fonction récupère toutes les informations de la base de données de Prestashop et ajoute des commandes dans la table ldb_order.
-function quiPrendTout() {
-    global $mojp;
-    global $presta;
-
-    $result = $presta->prepare("SELECT id_order,date_add FROM ps_orders ORDER BY id_order DESC LIMIT 0,1");
-    $result->execute();
-    $orders = $result->fetch();
-    $toAddList = array();
-    $nb = $orders->id_order;
-    $ship = $orders->date_add;
-
-    $verifTable = $mojp->prepare("SELECT * FROM ldb_orders");
-    $verifTable->bindValue(":idOrder", $nb, PDO::PARAM_STR);
-    $verifTable->execute();
-    $countTable = $verifTable->rowCount();
-    $counter = 0;
-    $isAllTable = false;
-    if ($countTable != 0) {
-        while ($counter == 0 && $nb != 0) {
-            $result = $mojp->prepare("SELECT * FROM ldb_orders WHERE idOrder = :idOrder");
-            $result->bindValue(":idOrder", $nb, PDO::PARAM_STR);
-            $result->execute();
-            $counter = $result->rowCount();
-            if ($counter == 0) {
-                $toAddList[] = $nb;
-            }
-            $nb--;
-        };
-
-    }else {
-        $AllOrders = $presta->prepare("SELECT id_order FROM ps_orders ORDER BY id_order");
-        $AllOrders->execute();
-        $AllOrderss = $AllOrders->fetchAll();
-        foreach ($AllOrderss as $list => $key) {
-            $toAddList[] = $key;
-        }
-        $isAllTable = true;
+    $resultat = $result->fetch();
+    if ($result != null) {
+        return $resultat;
     }
-
-    if ($toAddList != null) {
-        if ($isAllTable == false) {
-            krsort($toAddList);
-        }
-
-        foreach ($toAddList as $idOrd) {
-            if ($isAllTable) {
-                $selectInfoFromPresta = selectInfoFromPrestaById($idOrd->id_order);
-                $id = $idOrd->id_order;
-            }else {
-                $selectInfoFromPresta = selectInfoFromPrestaById($idOrd);
-                $id = $idOrd;
-            }
-            $tracking = $selectInfoFromPresta->shipping_number;
-
-            $reference = $selectInfoFromPresta->reference;
-
-            AjoutOrder($id, $ship, $tracking, $reference);
-        }
-    }
-    return false;
+    return 0;
 }
 
 //Permet d'ajouter une commande récupérée depuis la base de données de Prestashop.
-function AjoutOrder($idOrder, $ship, $tracking, $reference) {
+function AjoutOrder($idOrder, $dateOrder, $tracking, $reference, $note) {
     global $mojp;
-    $result = $mojp->prepare("INSERT INTO ldb_orders VALUES ('', :idOrder, :ship, :tracking, :ref, '', '')");
-    $result->bindValue(":idOrder", $idOrder);
-    $result->bindValue(":ship", $ship);
+    $result = $mojp->prepare("INSERT INTO ldb_orders VALUES ('', :idOrderPresta, :dateOrder, :tracking, :ref, :note, '')");
+    $result->bindValue(":idOrderPresta", $idOrder);
+    $result->bindValue(":dateOrder", $dateOrder);
     $result->bindValue(":tracking", $tracking);
     $result->bindValue(":ref", $reference);
+    $result->bindValue(":note", $note);
     $result->execute();
     return true;
 }
@@ -147,9 +89,29 @@ function AjoutOrder($idOrder, $ship, $tracking, $reference) {
 //On édite la note.
 function UpdateNote($idOrder, $note){
     global $mojp;
-    $result = $mojp->prepare("UPDATE ldb_orders SET note = :note WHERE idOrder = :idOrder");
-    $result->bindValue(":idOrder", $idOrder, PDO::PARAM_STR);
-    $result->bindValue(":note", $note, PDO::PARAM_STR);
-    $result->execute();
+
+    $verifOrderExist = $mojp->prepare("SELECT COUNT(*) as JenAiMarre FROM ldb_orders WHERE idOrderPresta = :idOrderPresta");
+    $verifOrderExist->bindValue(":idOrderPresta", $idOrder, PDO::PARAM_STR);
+    $verifOrderExist->execute();
+    $countOrder = $verifOrderExist->fetch();
+
+    if ($countOrder->JenAiMarre > 0) {
+        if ($note != null) {
+            $result = $mojp->prepare("UPDATE ldb_orders SET Note = :note WHERE idOrderPresta = :idOrderPresta");
+            $result->bindValue(":note", $note, PDO::PARAM_STR);
+        }else {
+            $result = $mojp->prepare("DELETE FROM ldb_orders WHERE idOrderPresta = :idOrderPresta");
+        }
+        $result->bindValue(":idOrderPresta", $idOrder, PDO::PARAM_STR);
+        $result->execute();
+    }else {
+        $prestaOrder = selectInfoFromPrestaById($idOrder);
+        print_r($prestaOrder);
+        $dateOrder = $prestaOrder->date_add;
+        $tracking = $prestaOrder->shipping_number;
+        $reference = $prestaOrder->reference;
+        AjoutOrder($idOrder, $dateOrder, $tracking, $reference, $note);
+    }
+
     header("location: index.php", true, 302);
 }
