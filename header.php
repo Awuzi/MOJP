@@ -13,7 +13,7 @@ session_start();
 require_once 'header.php';
 require_once 'inc/manager-db.php';
 $getInfoOrders = selectInfoFromPresta();
-$connexion = (connectToBDD($db['namePresta'], $db['userPresta'], $db['passPresta']) && connectToBDD($db['nameMOJP'], $db['userMOJP'], $db['passMOJP']) == true);
+$connexion = (connectToBDD($db['namePresta'], $db['userPresta'], $db['passPresta'], $db['serverName']) && connectToBDD($db['nameMOJP'], $db['userMOJP'], $db['passMOJP'],  $db['serverName']) == true);
 if (!isset($_SESSION["connect"])) { header("location: login.php", true, 302); }
 ?>
 <!DOCTYPE html>
