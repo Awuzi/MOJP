@@ -35,11 +35,11 @@ if (isset($_POST['editNote'])) UpdateNote($_POST['editID'], $_POST['note']);
                                 $selectOrderItem = selectOrderItem($idOrder, $element->reference);
                                 $selectCarrier = selectCarrier($idCarrier);
                                 $email = $selectCustomer->email;
-                                if (endsWith($email,"marketplace.amazon.co.uk")) $email = "AZ";
+                                if (endsWith($email, "marketplace.amazon.co.uk")) $email = "AZ";
                                 ?>
                                 <tr>
-                                    <td><?php echo $idOrder;?></td>
-                                    <td><?php echo $email. "\n"; ?></td>
+                                    <td><?php echo $idOrder; ?></td>
+                                    <td><?php echo $email . "\n"; ?></td>
                                     <td><?php echo $selectCustomer->firstname . " " . $selectCustomer->lastname . "\n"; ?></td>
                                     <td><?php echo $selectCustomerAdress->address1 . ", " . $selectCustomerAdress->city . "\n"; ?></td>
                                     <td><?php
@@ -49,16 +49,18 @@ if (isset($_POST['editNote'])) UpdateNote($_POST['editID'], $_POST['note']);
                                         ?></td>
                                     <td><?php echo $date; ?></td>
                                     <td><?php echo round($element->total_paid, 1) . " $" . "\n"; ?></td>
-                                    <td><?php echo $selectCarrier->name;?></td>
+                                    <td><?php echo $selectCarrier->name; ?></td>
 
                                     <td>
-                                        <a href="?OrderId=<?php echo $element->id_order;?>"><button type="button" class="btn btn-outline-primary">
+                                        <a href="?OrderId=<?php echo $element->id_order; ?>">
+                                            <button type="button" class="btn btn-outline-primary">
                                                 <?php if ($note != null) { ?>
                                                     <i class="fas fa-pen"></i>
-                                                <?php }else { ?>
+                                                <?php } else { ?>
                                                     <i class="fas fa-plus-square"></i>
                                                 <?php } ?>
-                                            </button></a>
+                                            </button>
+                                        </a>
                                     </td>
                                     <td>
                                         <select class="form-control form-control-sm">
@@ -72,7 +74,7 @@ if (isset($_POST['editNote'])) UpdateNote($_POST['editID'], $_POST['note']);
                             </tbody>
                         </table>
                     </div>
-                    <?php if(isset($_GET['OrderId'])) include('inc/modal.php'); ?>
+                    <?php if (isset($_GET['OrderId'])) include('inc/modal.php'); ?>
                 <?php } else { ?>
                     <div class="alert alert-danger m-auto col-md-6" style="text-align: center;">
                         connexion au deux bases de donnée impossible !

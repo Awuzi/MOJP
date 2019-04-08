@@ -87,7 +87,7 @@ function AjoutOrder($idOrder, $dateOrder, $tracking, $reference, $note) {
 }
 
 //On édite la note.
-function UpdateNote($idOrder, $note){
+function UpdateNote($idOrder, $note) {
     global $mojp;
 
     $verifOrderExist = $mojp->prepare("SELECT COUNT(*) as JenAiMarre FROM ldb_orders WHERE idOrderPresta = :idOrderPresta");
@@ -99,12 +99,12 @@ function UpdateNote($idOrder, $note){
         if ($note != null) {
             $result = $mojp->prepare("UPDATE ldb_orders SET Note = :note WHERE idOrderPresta = :idOrderPresta");
             $result->bindValue(":note", $note, PDO::PARAM_STR);
-        }else {
+        } else {
             $result = $mojp->prepare("DELETE FROM ldb_orders WHERE idOrderPresta = :idOrderPresta");
         }
         $result->bindValue(":idOrderPresta", $idOrder, PDO::PARAM_STR);
         $result->execute();
-    }else {
+    } else {
         $prestaOrder = selectInfoFromPrestaById($idOrder);
         print_r($prestaOrder);
         $dateOrder = $prestaOrder->date_add;

@@ -10,11 +10,14 @@ header('Access-Control-Allow-Origin: *');
 ini_set('session.cookie_httponly', 1);
 ini_set('session.cookie_secure', 1);
 session_start();
-require_once 'header.php';
+//file_exists('install.php') ? header('location:install.php',true, 302) :null; TODO décommenter à la fin du projet !!!!!!
 require_once 'inc/manager-db.php';
+
 $getInfoOrders = selectInfoFromPresta();
 $connexion = ($presta && $mojp == true);
-if (!isset($_SESSION["connect"])) { header("location: login.php", true, 302); }
+if (!isset($_SESSION["connect"])) {
+    header("location: login.php", true, 302);
+}
 ?>
 <!DOCTYPE html>
 <html lang="fr" class="h-100">
@@ -34,20 +37,20 @@ if (!isset($_SESSION["connect"])) { header("location: login.php", true, 302); }
     <script src="assets/library/bootstrap.min.js"></script>
 </head>
 <body class="d-flex flex-column h-100">
-    <header>
-        <!-- Barre de navigation -->
-        <nav class="navbar navbar-expand-md navbar-dark fixed-top rounded-bottom" style="background: #0f6ab4;">
-            <a class="navbar-brand" href="index.php">MOJP</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false"
-                    aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="login.php?logout">Logout</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </header>
+<header>
+    <!-- Barre de navigation -->
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top rounded-bottom" style="background: #0f6ab4;">
+        <a class="navbar-brand" href="index.php">MOJP</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="login.php?logout">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>

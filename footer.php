@@ -5,7 +5,7 @@
                 "processing": true,
                 "serverSide": true,
                 "ajax": "datatableProcess.php"
-            } );
+            });
         });
     }
     if (document.getElementById("modal")) {
@@ -15,12 +15,12 @@
     }
 
 </script>
-<hr />
+<hr/>
 <footer class="footer mt-auto py-3">
-  <div class="container">
-    <span class="text-muted">SIO SLAM MyWebApp &copy; 2019</span>
-  </div>
+    <div class="container">
+        <span class="text-muted">SIO SLAM MyWebApp &copy; 2019</span>
+    </div>
 </footer>
 
-  </body>
+</body>
 </html>

@@ -3,7 +3,7 @@ SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
-CREATE TABLE `ldb_orders` (
+CREATE TABLE IF NOT EXISTS `ldb_orders` (
   `idldb_orders` int(45) NOT NULL,
   `idOrderPresta` int(10) UNSIGNED NOT NULL,
   `Ship` varchar(45) DEFAULT NULL,

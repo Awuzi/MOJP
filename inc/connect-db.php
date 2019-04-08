@@ -1,24 +1,9 @@
 <?php
 
-function createDatabase($dbuser, $dbpass, $srvName){
-    $options = [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ, PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES UTF8', PDO::ATTR_EMULATE_PREPARES => false];
-    try {
-        $initializeDB = new PDO("mysql:host=$srvName", $dbuser, $dbpass, $options);
-        $initializeDB->exec("CREATE DATABASE IF NOT EXISTS projet_mojp;");
-        $initializeDB->exec("USE projet_mojp;");
-        $initializeDB->exec(file_get_contents("./inc/createDatabase.sql"));
-    }
-    catch(PDOException $e)
-    {
-        echo $e->getMessage();
-    }
-}
-
 function connectToBDD($dbname, $dbuser, $dbpass, $srvName) {
     $options = [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ, PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES UTF8', PDO::ATTR_EMULATE_PREPARES => false];
     try {
-        createDatabase($dbuser, $dbpass, $srvName);
-        return new PDO('mysql:host='.$srvName.';dbname=' . $dbname . ';charset=utf8', $dbuser, $dbpass, $options);
+        return new PDO('mysql:host=' . $srvName . ';dbname=' . $dbname . ';charset=utf8', $dbuser, $dbpass, $options);
     } catch (PDOException $e) {
         $dbError = 'Connexion à la base de donnée impossible !' . (DEBUG ? "\n" . $e->getMessage() : '');
         die($dbError);
