@@ -5,8 +5,7 @@ function connectToBDD($dbname, $dbuser, $dbpass, $srvName) {
     try {
         return new PDO('mysql:host=' . $srvName . ';dbname=' . $dbname . ';charset=utf8', $dbuser, $dbpass, $options);
     } catch (PDOException $e) {
-        $dbError = 'Connexion à la base de donnée impossible !' . (DEBUG ? "\n" . $e->getMessage() : '');
-        die($dbError);
+        echo 'Connexion à la base de donnée impossible !';
     }
 }
 
