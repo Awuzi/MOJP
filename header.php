@@ -18,6 +18,10 @@ $connexion = ($presta && $mojp == true);
 if (!isset($_SESSION["connect"])) {
     header("location: login.php", true, 302);
 }
+
+if (isset($_GET['light'])) {
+    $_COOKIE['light'] = $_GET['light'];
+}
 ?>
 <!DOCTYPE html>
 <html lang="fr" class="h-100">
@@ -47,6 +51,13 @@ if (!isset($_SESSION["connect"])) {
         </button>
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
             <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                <?php if (isset($_COOKIE['light']) && ($_COOKIE['light'] == "on")) { ?>
+                    <a class="nav-link" href="?light=off"><i class="fas fa-moon" style="color: gray;"></i></a>
+                    <?php }elseif (isset($_COOKIE['light']) && ($_COOKIE['light'] == "off")) { ?>
+                    <a class="nav-link" href="?light=on"><i class="fas fa-sun" style="color: yellow;"></i></a>
+                    <?php }else setcookie("light", "on"); ?>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="login.php?logout">Logout</a>
                 </li>
