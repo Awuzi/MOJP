@@ -44,7 +44,7 @@ function endsWith($haystack, $needle) {
 // Cette fonction est utilisée pour pour récupérer les produits du panier d'un client.
 function selectOrderItem($idOrder, $reference) {
     global $presta;
-    $result = $presta->prepare("SELECT reference, product_name, product_quantity FROM ps_orders, ps_order_detail WHERE ps_order_detail.id_order = :id_order AND ps_orders.reference = :reference;");
+    $result = $presta->prepare("SELECT reference, product_name, product_quantity, product_reference FROM ps_orders, ps_order_detail WHERE ps_order_detail.id_order = :id_order AND ps_orders.reference = :reference;");
     $result->bindValue(':id_order', $idOrder, PDO::PARAM_STR);
     $result->bindValue(':reference', $reference, PDO::PARAM_STR);
     $result->execute();

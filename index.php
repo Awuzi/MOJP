@@ -16,10 +16,11 @@ if (isset($_POST['editNote'])) UpdateNote($_POST['editID'], $_POST['note']);
                             <th scope="col">Email</th>
                             <th scope="col">Nom</th>
                             <th scope="col">Adresse</th>
-                            <th scope="col">Réference</th>
+                            <th scope="col">Reference</th>
                             <th scope="col">Date</th>
                             <th scope="col">Total</th>
                             <th scope="col">Transporteur</th>
+                            <th scope="col">Items</th>
                             <th scope="col">Note</th>
                             <th scope="col">Action</th>
                             </thead>
@@ -42,15 +43,16 @@ if (isset($_POST['editNote'])) UpdateNote($_POST['editID'], $_POST['note']);
                                     <td><?php echo $email . "\n"; ?></td>
                                     <td><?php echo $selectCustomer->firstname . " " . $selectCustomer->lastname . "\n"; ?></td>
                                     <td><?php echo $selectCustomerAdress->address1 . ", " . $selectCustomerAdress->city . "\n"; ?></td>
-                                    <td><?php
-                                        foreach ($selectOrderItem as $item) {
-                                            echo $item->product_quantity . "x " . $item->product_name . " (" . $item->reference . ")<br>";
-                                        }
-                                        ?></td>
+                                    <td><?php echo $element->reference; ?></td>
                                     <td><?php echo $date; ?></td>
                                     <td><?php echo round($element->total_paid, 1) . " $" . "\n"; ?></td>
                                     <td><?php echo $selectCarrier->name; ?></td>
-
+                                    <td><?php
+                                        foreach ($selectOrderItem as $item) {
+                                            echo $item->product_quantity . "x " . $item->product_name . " (" . $item->product_reference . ")<br>";
+                                        }
+                                        ?>
+                                    </td>
                                     <td>
                                         <a href="?OrderId=<?php echo $element->id_order; ?>">
                                             <button type="button" class="btn btn-outline-primary">
