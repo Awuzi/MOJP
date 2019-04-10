@@ -46,8 +46,8 @@ session_start();
   }
   ?>
 
-  <img src="images/minions.png" class="minion-right-login">
-  <img src="images/minions.png" class="minion-down-login">
+  <img src="images/minion.png" class="minion-right-login">
+  <img src="images/minion.png" class="minion-down-login">
 
   <div style="position: absolute; bottom: 0;">
     <?php include_once 'footer.php'; ?>
