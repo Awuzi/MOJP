@@ -63,7 +63,7 @@ function selectCarrier($idCarrier) {
 //Sélectionne la note en fonction de l'id.
 function selectNote($idOrder) {
     global $mojp;
-    $result = $mojp->prepare("SELECT idOrderPresta,Note,Actions FROM ldb_orders WHERE idOrderPresta = :idOrder");
+    $result = $mojp->prepare("SELECT idOrderPresta, Note, Actions FROM ldb_orders WHERE idOrderPresta = :idOrder");
     $result->bindValue(":idOrder", $idOrder, PDO::PARAM_STR);
     $result->execute();
     $resultat = $result->fetch();
@@ -90,12 +90,12 @@ function AjoutOrder($idOrder, $dateOrder, $tracking, $reference, $note) {
 function UpdateNote($idOrder, $note) {
     global $mojp;
 
-    $verifOrderExist = $mojp->prepare("SELECT COUNT(*) as JenAiMarre FROM ldb_orders WHERE idOrderPresta = :idOrderPresta");
+    $verifOrderExist = $mojp->prepare("SELECT COUNT(*) as numeroCommande FROM ldb_orders WHERE idOrderPresta = :idOrderPresta");
     $verifOrderExist->bindValue(":idOrderPresta", $idOrder, PDO::PARAM_STR);
     $verifOrderExist->execute();
     $countOrder = $verifOrderExist->fetch();
 
-    if ($countOrder->JenAiMarre > 0) {
+    if ($countOrder->numeroCommande > 0) {
         if ($note != null) {
             $result = $mojp->prepare("UPDATE ldb_orders SET Note = :note WHERE idOrderPresta = :idOrderPresta");
             $result->bindValue(":note", $note, PDO::PARAM_STR);
@@ -112,6 +112,5 @@ function UpdateNote($idOrder, $note) {
         $reference = $prestaOrder->reference;
         AjoutOrder($idOrder, $dateOrder, $tracking, $reference, $note);
     }
-
     header("location: index.php", true, 302);
 }

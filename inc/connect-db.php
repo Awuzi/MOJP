@@ -7,6 +7,7 @@ function connectToBDD($dbname, $dbuser, $dbpass, $srvName) {
     } catch (PDOException $e) {
         echo 'Connexion à la base de donnée impossible !';
     }
+    return null;
 }
 
 $db = parse_ini_file("./inc/config.ini");
