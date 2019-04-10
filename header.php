@@ -1,6 +1,6 @@
 <?php
 // Sécurisation du site
-header("Content-Security-Policy: default-src 'none'; style-src 'self' 'unsafe-inline' https://use.fontawesome.com/; frame-src 'self' https://www.google.com/; frame-ancestors 'self'; font-src 'self' https://use.fontawesome.com/; img-src 'self'; object-src 'none'; script-src 'self' 'sha256-xSESmeJ5YM1mxTtTc0UJYR25a2jJgQ9oZKmEj7E+Nh0='; base-uri 'self'; form-action 'self';");
+header("Content-Security-Policy: default-src 'none'; style-src 'self' 'unsafe-inline' https://use.fontawesome.com/; frame-src 'self' https://www.google.com/; frame-ancestors 'self'; font-src 'self' https://use.fontawesome.com/; img-src 'self'; object-src 'none'; script-src 'self' 'sha256-EphB+/dAQZWtAn1pZFgs64jQ9VqK//fn52o+TgFKTTw='; base-uri 'self'; form-action 'self';");
 header("X-XSS-Protection: 1; mode=block");
 header("X-Frame-Options: SAMEORIGIN");
 header("X-Content-Type-Options: nosniff");
