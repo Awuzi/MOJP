@@ -4,7 +4,7 @@ require_once 'connect-db.php';
 //Cette fonction récupère les données de la base de données de Prestashop et de les retourner dans un tableau associatif.
 function selectInfoFromPresta() {
     global $presta;
-    return $presta->query("SELECT `id_customer`,`id_address_delivery`,`id_order`,`reference`,`id_carrier`,`date_add`,`id_cart`,`total_paid`,`shipping_number`,`gift_message` FROM ps_orders LIMIT 100")->fetchAll();
+    return $presta->query("SELECT * FROM ps_orders LIMIT 100")->fetchAll();
 }
 
 //On récupère toutes les informations en fonction de l'id fourni à la fonction .
@@ -34,14 +34,15 @@ function selectCustomerAdress($idCustomer) {
     return $result->fetch();
 }
 
-function endsWith($haystack, $needle) {
-    $needle === '' ? TRUE : FALSE;
-    $diff = strlen($haystack) - strlen($needle);
-    return $diff >= 0 && strpos($haystack, $needle, $diff) !== FALSE;
+
+function endsWith($email, $endString) {
+    $endString === '' ? TRUE : FALSE;
+    $diff = strlen($email) - strlen($endString);
+    return $diff >= 0 && strpos($email, $endString, $diff) !== FALSE;
 }
 
 
-// Cette fonction est utilisée pour pour récupérer les produits du panier d'un client.
+//Récupérer les produits du panier d'un client.
 function selectOrderItem($idOrder, $reference) {
     global $presta;
     $result = $presta->prepare("SELECT reference, product_name, product_quantity, product_reference FROM ps_orders, ps_order_detail WHERE ps_order_detail.id_order = :id_order AND ps_orders.reference = :reference;");
@@ -63,14 +64,12 @@ function selectCarrier($idCarrier) {
 //Sélectionne la note en fonction de l'id.
 function selectNote($idOrder) {
     global $mojp;
-    $result = $mojp->prepare("SELECT idOrderPresta, Note, Actions FROM ldb_orders WHERE idOrderPresta = :idOrder");
+    $result = $mojp->prepare("SELECT idOrderPresta, Note, Actions 
+                            FROM ldb_orders WHERE idOrderPresta = :idOrder");
     $result->bindValue(":idOrder", $idOrder, PDO::PARAM_STR);
     $result->execute();
     $resultat = $result->fetch();
-    if ($result != null) {
-        return $resultat;
-    }
-    return 0;
+    return $result != null ? $resultat : 0;
 }
 
 //Permet d'ajouter une commande récupérée depuis la base de données de Prestashop.
@@ -89,20 +88,19 @@ function AjoutOrder($idOrder, $dateOrder, $tracking, $reference, $note) {
 //On édite la note.
 function UpdateNote($idOrder, $note) {
     global $mojp;
-
-    $verifOrderExist = $mojp->prepare("SELECT COUNT(*) as numeroCommande FROM ldb_orders WHERE idOrderPresta = :idOrderPresta");
-    $verifOrderExist->bindValue(":idOrderPresta", $idOrder, PDO::PARAM_STR);
+    $verifOrderExist = $mojp->prepare("SELECT COUNT(*) as commandExist FROM ldb_orders WHERE idOrderPresta = :idOrderPresta");
+    $verifOrderExist->bindValue(":idOrderPresta", $idOrder, PDO::PARAM_INT);
     $verifOrderExist->execute();
-    $countOrder = $verifOrderExist->fetch();
+    $countOrderExists = $verifOrderExist->fetch();
 
-    if ($countOrder->numeroCommande > 0) {
+    if ($countOrderExists->commandExist != 0) {
         if ($note != null) {
             $result = $mojp->prepare("UPDATE ldb_orders SET Note = :note WHERE idOrderPresta = :idOrderPresta");
             $result->bindValue(":note", $note, PDO::PARAM_STR);
         } else {
             $result = $mojp->prepare("DELETE FROM ldb_orders WHERE idOrderPresta = :idOrderPresta");
         }
-        $result->bindValue(":idOrderPresta", $idOrder, PDO::PARAM_STR);
+        $result->bindValue(":idOrderPresta", $idOrder, PDO::PARAM_INT);
         $result->execute();
     } else {
         $prestaOrder = selectInfoFromPrestaById($idOrder);

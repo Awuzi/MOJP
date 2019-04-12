@@ -10,7 +10,7 @@ require_once "inc/connect-db.php"; ?>
 <body>
 <form method="POST">
     <div class="card">
-          <span class="card-header ch-login">
+          <span class="card-header ch-login rounded-bottom">
             <span class="left-login">MOJP</span>
             <span class="right-login">Password</span>
           </span>
@@ -18,8 +18,10 @@ require_once "inc/connect-db.php"; ?>
             <blockquote class="blockquote mt-0 in-login">
                 <label for="password" class="h2 font-italic">Entrez le mot de passe de validation</label>
                 <br>
-                <input type="password" name="mot_de_passe" id="password" required autofocus/>
-                <input type="submit" value="Valider" name="connexion"/>
+                <div class="form-group">
+                    <input type="password" name="mot_de_passe" id="password" required autofocus/>
+                    <input type="submit" value="Valider" name="connexion"/>
+                </div>
             </blockquote>
         </div>
     </div>

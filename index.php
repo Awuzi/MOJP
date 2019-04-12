@@ -10,18 +10,18 @@ if (isset($_POST['editNote'])) UpdateNote($_POST['editID'], $_POST['note']);
             <?php if ($connexion) { ?>
                 <div class="mt-4">
                     <table class="table border" id="table">
-                        <thead class="thead" style="text-align: center; background : royalblue; color: white;">
-                        <th scope="col">Id</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Nom</th>
-                        <th scope="col">Adresse</th>
-                        <th scope="col">Reference</th>
-                        <th scope="col">Date</th>
-                        <th scope="col">Total</th>
-                        <th scope="col">Transporteur</th>
-                        <th scope="col">Items</th>
-                        <th scope="col">Note</th>
-                        <th scope="col">Action</th>
+                        <thead class="thead <?php echo $themeMode; ?>" style="text-align: center; background : royalblue; color: white;">
+                            <th scope="col">Id</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Adress</th>
+                            <th scope="col">Reference</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Total</th>
+                            <th scope="col">Carrier</th>
+                            <th scope="col">Items</th>
+                            <th scope="col">Note</th>
+                            <th scope="col">Action</th>
                         </thead>
                         <tbody style="text-align: center;">
                         <?php foreach ($getInfoOrders as $element) {
