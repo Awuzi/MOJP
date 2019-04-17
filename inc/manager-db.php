@@ -2,12 +2,19 @@
 require_once 'connect-db.php';
 
 //Cette fonction récupère les données de la base de données de Prestashop et de les retourner dans un tableau associatif.
+/**
+ * @return array
+ */
 function selectInfoFromPresta() {
     global $presta;
     return $presta->query("SELECT * FROM ps_orders LIMIT 100")->fetchAll();
 }
 
 //On récupère toutes les informations en fonction de l'id fourni à la fonction .
+/**
+ * @param $idOrder
+ * @return mixed
+ */
 function selectInfoFromPrestaById($idOrder) {
     global $presta;
     $result = $presta->prepare("SELECT * FROM ps_orders WHERE id_order = :idOrder");
@@ -17,6 +24,10 @@ function selectInfoFromPrestaById($idOrder) {
 }
 
 //Sélectionne et renvoie les informations concernant un client.
+/**
+ * @param $idCustomer
+ * @return mixed
+ */
 function selectCustomer($idCustomer) {
     global $presta;
     $result = $presta->prepare("SELECT `firstname`, `lastname`,`email` FROM ps_customer WHERE id_customer = :id_customer");
@@ -26,6 +37,10 @@ function selectCustomer($idCustomer) {
 }
 
 //Récupère l'adresse d'un client.
+/**
+ * @param $idCustomer
+ * @return mixed
+ */
 function selectCustomerAdress($idCustomer) {
     global $presta;
     $result = $presta->prepare("SELECT `address1`, `city` FROM ps_address WHERE id_customer = :id_customer");
@@ -35,6 +50,11 @@ function selectCustomerAdress($idCustomer) {
 }
 
 
+/**
+ * @param $email
+ * @param $endString
+ * @return bool
+ */
 function endsWith($email, $endString) {
     $endString === '' ? TRUE : FALSE;
     $diff = strlen($email) - strlen($endString);
@@ -43,6 +63,11 @@ function endsWith($email, $endString) {
 
 
 //Récupérer les produits du panier d'un client.
+/**
+ * @param $idOrder
+ * @param $reference
+ * @return array
+ */
 function selectOrderItem($idOrder, $reference) {
     global $presta;
     $result = $presta->prepare("SELECT reference, product_name, product_quantity, product_reference FROM ps_orders, ps_order_detail WHERE ps_order_detail.id_order = :id_order AND ps_orders.reference = :reference;");
@@ -53,6 +78,10 @@ function selectOrderItem($idOrder, $reference) {
 }
 
 //Récupère le transporteur attribué à une commande.
+/**
+ * @param $idCarrier
+ * @return mixed
+ */
 function selectCarrier($idCarrier) {
     global $presta;
     $result = $presta->prepare("SELECT reference, ps_carrier.name FROM ps_orders, ps_carrier WHERE ps_carrier.id_carrier = :id_carrier");
@@ -62,6 +91,10 @@ function selectCarrier($idCarrier) {
 }
 
 //Sélectionne la note en fonction de l'id.
+/**
+ * @param $idOrder
+ * @return int|mixed
+ */
 function selectNote($idOrder) {
     global $mojp;
     $result = $mojp->prepare("SELECT idOrderPresta, Note, Actions 
@@ -73,6 +106,14 @@ function selectNote($idOrder) {
 }
 
 //Permet d'ajouter une commande récupérée depuis la base de données de Prestashop.
+/**
+ * @param $idOrder
+ * @param $dateOrder
+ * @param $tracking
+ * @param $reference
+ * @param $note
+ * @return bool
+ */
 function AjoutOrder($idOrder, $dateOrder, $tracking, $reference, $note) {
     global $mojp;
     $result = $mojp->prepare("INSERT INTO ldb_orders VALUES ('', :idOrderPresta, :dateOrder, :tracking, :ref, :note, '')");
@@ -86,6 +127,10 @@ function AjoutOrder($idOrder, $dateOrder, $tracking, $reference, $note) {
 }
 
 //On édite la note.
+/**
+ * @param $idOrder
+ * @param $note
+ */
 function UpdateNote($idOrder, $note) {
     global $mojp;
     $verifOrderExist = $mojp->prepare("SELECT COUNT(*) as commandExist FROM ldb_orders WHERE idOrderPresta = :idOrderPresta");
