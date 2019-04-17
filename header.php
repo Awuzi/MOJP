@@ -16,6 +16,7 @@ $connexion = ($presta && $mojp == true);
 if (!isset($_SESSION["connect"])) {
     header("location: login.php", true, 302);
 }
+//initialisation des cookies pour le theme sombre
 if (isset($_GET['light'])) {
     $_COOKIE['light'] = $_GET['light'];
     if ($_COOKIE['light'] == 'off') {

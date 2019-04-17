@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * @param $dbname
+ * @param $dbuser
+ * @param $dbpass
+ * @param $srvName
+ * @return PDO|null
+ */
 function connectToBDD($dbname, $dbuser, $dbpass, $srvName) {
     $options = [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ, PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES UTF8', PDO::ATTR_EMULATE_PREPARES => false];
     try {
