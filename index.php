@@ -9,7 +9,7 @@ if (isset($_POST['editNote'])) UpdateNote($_POST['editID'], $_POST['note']);
             <h1>MOJP SIO12</h1>
             <?php if ($connexion) { ?>
                 <div class="mt-4">
-                    <table class="table border" id="table"> <!-- affichage des elements dans un tableau -->
+                    <table class="table border" id="table">
                         <thead class="thead <?php echo $themeMode; ?>" style="text-align: center; background : royalblue; color: white;">
                             <th scope="col">Id</th>
                             <th scope="col">Email</th>
