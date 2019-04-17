@@ -1,0 +1,2 @@
+    ErrorDocument 404 http://localhost/PPE/PROJET%20MOJP/projet_mojp/404.php
+    ErrorDocument 403 http://localhost/PPE/PROJET%20MOJP/projet_mojp/403.php

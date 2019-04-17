@@ -38,7 +38,7 @@ if (isset($_POST['editNote'])) UpdateNote($_POST['editID'], $_POST['note']);
                             $email = $selectCustomer->email;
 
                             if (endsWith($email, "marketplace.amazon.co.uk")) $email = "AZ"; ?>
-                            <tr>
+                            <tr class="<?php echo $themeMode; ?>">
                                 <td><?php echo $idOrder; ?></td>
                                 <td><?php echo $email . "\n"; ?></td>
                                 <td><?php echo $selectCustomer->firstname . " " . $selectCustomer->lastname . "\n"; ?></td>
@@ -53,9 +53,15 @@ if (isset($_POST['editNote'])) UpdateNote($_POST['editID'], $_POST['note']);
                                     }
                                     ?>
                                 </td>
+                                <style>
+
+                                    #act {
+                                        background-color: ;
+                                    }
+                                </style>
                                 <td>
                                     <a href="?OrderId=<?php echo $element->id_order; ?>">
-                                        <button type="button" class="btn btn-outline-primary">
+                                        <button type="button" class="btn <?php echo $outline;?>">
                                             <?php if ($note != null) { ?>
                                                 <i class="fas fa-pen"></i>
                                             <?php } else { ?>

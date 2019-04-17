@@ -20,8 +20,10 @@ if (isset($_GET['light'])) {
     $_COOKIE['light'] = $_GET['light'];
     if ($_COOKIE['light'] == 'off') {
         $themeMode = "bg-dark";
+        $outline = "btn btn-outline-dark";
     } else {
         $themeMode = "";
+        $outline = "btn-outline-primary";
     }
 }
 ?>
