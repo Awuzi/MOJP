@@ -22,12 +22,13 @@ if ($presta && $mojp) {
     if (isset($_POST['save'])) {
         $iniConfig =
             "namePresta = ".$_POST['namePresta'].PHP_EOL.
-            "userPresta =".$_POST['userPresta'].PHP_EOL.
-            "passPresta =".$_POST['passPresta'].PHP_EOL.
-            "nameMOJP =".$_POST['nameMojp'].PHP_EOL.
-            "userMOJP =".$_POST['userMojp'].PHP_EOL.
-            "passMOJP =".$_POST['passMojp'].PHP_EOL.
-            "serverName =".$_POST['host'];
+            "userPresta = ".$_POST['userPresta'].PHP_EOL.
+            "passPresta = ".$_POST['passPresta'].PHP_EOL.
+            "nameMOJP = ".$_POST['nameMojp'].PHP_EOL.
+            "userMOJP = ".$_POST['userMojp'].PHP_EOL.
+            "passMOJP = ".$_POST['passMojp'].PHP_EOL.
+            "InterfacePass = ".$_POST['InterfacePass'].PHP_EOL.
+            "serverName = ".$_POST['host'];
         file_put_contents("./inc/config.ini",$iniConfig);
     }
 }
@@ -75,6 +76,10 @@ $db = parse_ini_file("./inc/config.ini");
         <tr>
             <td>Password</td>
             <td><input type="text" name="passMojp" value="<?php echo $db['passMOJP']; ?>"/></td>
+        </tr>
+        <tr>
+            <td>Interface Pass</td>
+            <td><input type="text" name="InterfacePass" value="<?php echo $db['InterfacePass']; ?>"/></td>
         </tr>
         <tr>
             <td style="text-align: center;" colspan="2"><br /><input type="submit" name="save" value="Save"/> </td>
