@@ -7,15 +7,14 @@ des commandes passées sur une boutique de commerce en ligne, cette dernière es
 
 ## Installation : 
 
-**Note:**
-Assurez vous d'avoir d'abord installer Prestashop v1.7.x.
-
-**Attention:**
-Lors de l'installation de Prestashop, assurez de configurez les tables de manières à ce qu'elles commencent par "ps_" (ex: ps_orders).
+### **Assurez vous d'avoir d'abord installer Prestashop v1.7.x.**
+### **Lors de l'installation de Prestashop, assurez de configurez les tables de manières à ce qu'elles commencent par "ps_" (ex: ps_orders).**
 
 ---
 
-> Executer les commandes suivante sur votre serveur 
+> **Executer les commandes suivantes sur votre serveur**
+
+---
 
 ```sql 
 CREATE DATABASE IF NOT EXISTS projet_mojp;
