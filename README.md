@@ -12,7 +12,7 @@ des commandes passées sur une boutique de commerce en ligne, cette dernière es
 
 ---
 
-> **Executer les commandes suivantes sur votre serveur**
+> **Executer les commandes suivantes sur PhpMyAdmin**
 
 ---
 
