@@ -1,22 +1,25 @@
-#h1 Bienvenue sur le projet Meccha Orders Japan Postal (MOJP)
+# Bienvenue sur le projet Meccha Orders Japan Postal (MOJP)
 
-Installation : 
+MOJP est une application web sur laquelle il est possible de consulter des informations concernant 
+des commandes passées sur une boutique de commerce en ligne, cette dernière est créée avec le CMS Prestashop.
+
+---
+
+## Installation : 
 
 NOTE: **Note:**
 Assurez vous d'avoir d'abord installer Prestashop v1.7.x.
 
+ATTENTION : **Caution:**
+Lors de l'installation de Prestashop, assurez de configurez les tables de manières à ce qu'elles commencent par "ps_" (ex: ps_orders).
 
+---
+
+> Executer les commandes suivante sur votreserveur 
 
 ```sql 
 CREATE DATABASE IF NOT EXISTS projet_mojp;
-```
-
-```sql
-use projet_mojp
-```
-
-```sql
-CREATE TABLE IF NOT EXISTS `ldb_orders` (
+CREATE TABLE IF NOT EXISTS `projet_mojp`.`ldb_orders` (
   `idldb_orders` int(45) NOT NULL,
   `idOrderPresta` int(10) UNSIGNED NOT NULL,
   `Ship` varchar(45) DEFAULT NULL,
