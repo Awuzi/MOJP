@@ -21,6 +21,6 @@ ALTER TABLE `ldb_orders`
 ALTER TABLE `ldb_orders`
   MODIFY `idldb_orders` int(45) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
-ALTER TABLE `ldb_orders`
-  ADD CONSTRAINT `id` FOREIGN KEY (`idOrderPresta`) REFERENCES `prestashop`.`ps_orders` (`id_order`);
+-- ALTER TABLE `ldb_orders`
+--  ADD CONSTRAINT `id` FOREIGN KEY (`idOrderPresta`) REFERENCES `prestashop`.`ps_orders` (`id_order`);
 COMMIT;

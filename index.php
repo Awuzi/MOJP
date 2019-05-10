@@ -14,14 +14,14 @@ if (isset($_POST['editNote'])) UpdateNote($_POST['editID'], $_POST['note']);
                             <th scope="col">Id</th>
                             <th scope="col">Email</th>
                             <th scope="col">Name</th>
-                            <th scope="col">Adress</th>
+                            <th scope="col">Address</th>
                             <th scope="col">Reference</th>
                             <th scope="col">Date</th>
                             <th scope="col">Total</th>
                             <th scope="col">Carrier</th>
                             <th scope="col">Items</th>
                             <th scope="col">Note</th>
-                            <th scope="col">Action</th>
+                            <th scope="col">Status</th>
                         </thead>
                         <tbody style="text-align: center;">
                         <?php foreach ($getInfoOrders as $element) {
