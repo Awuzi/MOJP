@@ -40,3 +40,7 @@ ALTER TABLE `ldb_orders`
   ADD CONSTRAINT `id` FOREIGN KEY (`idOrderPresta`) REFERENCES `prestashop`.`ps_orders` (`id_order`);
 COMMIT;
 ```
+
+
+
+> **Lancez votre serveur web & enjoy**
