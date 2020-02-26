@@ -1,14 +1,15 @@
-# Bienvenue sur le projet Meccha Orders Japan Postal (MOJP)
-
+<h1 align="center">Meccha Orders Japan Postal (MOJP)</h1>
+<p align="center">
 MOJP est une application web sur laquelle il est possible de consulter des informations concernant 
 des commandes passées sur une boutique de commerce en ligne, cette dernière est créée avec le CMS Prestashop.
+</p>
 
 ---
 
 ## Installation : 
 
-### **Assurez vous d'avoir d'abord installer Prestashop v1.7.x.**
-### **Lors de l'installation de Prestashop, assurez de configurez les tables de manières à ce qu'elles commencent par "ps_" (ex: ps_orders).**
+#### **Assurez vous d'avoir d'abord installer Prestashop v1.7.x.**
+#### **Lors de l'installation de Prestashop, assurez de configurez les tables de manières à ce qu'elles commencent par "ps_" (ex: ps_orders).**
 
 ---
 
@@ -43,4 +44,4 @@ COMMIT;
 
 
 
-> **Lancez votre serveur web & enjoy**
+> **Lancez votre serveur web**
